@@ -20,12 +20,29 @@ class App extends Component {
     };
   }
 
+  selectPet = (petID) => {
+    // console.log(petID);
+    const newPets = this.state.petList;
+    const foundPet = newPets.find(k => k.id === petID);
+    // console.log(foundPet);
 
+    this.setState({
+      currentPet: foundPet
+    });
+
+  }
 
 
   render() {
     const { currentPet } = this.state;
-    
+    console.log(this.state);
+    console.log(this.setState)
+    let selectedPet = '';
+    if (currentPet) {
+      selectedPet = <PetDetails currentPet={currentPet} />
+      console.log(selectedPet);
+    }
+   
     return (
       <main className="App">
         <header className="app-header">
@@ -35,10 +52,15 @@ class App extends Component {
           { /* Wave 4:  Place to add the SearchBar component */ }
           <SearchBar />
         </section>
-          { /* Wave 2:  Where Pet Details should appear */ }
+        <section className="pet-details">
+          { selectedPet }
+        </section>
         <section className="pet-list-wrapper">
           { /* Wave 1:  Where PetList should appear */ }
-          <PetList pets={pets} />
+          <PetList 
+            pets={this.state.petList}
+            onSelectPet={this.selectPet}
+          />
 
         </section>
         <section className="new-pet-form-wrapper">
