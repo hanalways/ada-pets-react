@@ -12,6 +12,7 @@ const PetList = (props) => {
       return ( 
         <PetCard
           selectPetCallback={props.onSelectPet}
+          removePetCallback={props.onRemovePet}
           {...pet}
         />
       )

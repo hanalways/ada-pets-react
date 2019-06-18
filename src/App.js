@@ -20,6 +20,22 @@ class App extends Component {
     };
   }
 
+  removePet = (petID) => {
+    const newPets = this.state.petList;
+    const petToRemove = newPets.find(k => k.id === petID);
+
+    if (this.state.currentPet.id !== undefined && this.state.currentPet.id === petID) {
+      this.setState({
+        currentPet: undefined
+      })
+    }
+
+    newPets.splice(petToRemove, 1);
+    this.setState({
+      petList: newPets
+    })
+  }
+
   selectPet = (petID) => {
     // console.log(petID);
     const newPets = this.state.petList;
@@ -60,6 +76,7 @@ class App extends Component {
           <PetList 
             pets={this.state.petList}
             onSelectPet={this.selectPet}
+            onRemovePet={this.removePet}
           />
 
         </section>
